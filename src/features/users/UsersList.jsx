@@ -1,4 +1,5 @@
 import { useGetUsersQuery } from "./usersApiSlice";
+import User from "./User";
 
 const UsersList = () => {
   const {
@@ -7,7 +8,7 @@ const UsersList = () => {
     isSuccess,
     isError,
     error,
-  } = useGetUsersQuery;
+  } = useGetUsersQuery();
 
   let content;
 
