@@ -9,7 +9,7 @@ const DashFooter = () => {
 
   let goHomeButton = null;
 
-  if ((pathname = "/dash")) {
+  if (pathname !== "/dash") {
     goHomeButton = (
       <button
         className="dash-footer__button icon-button"
