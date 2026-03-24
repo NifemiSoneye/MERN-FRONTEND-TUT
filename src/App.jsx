@@ -28,7 +28,7 @@ function App() {
           <Route path="notes">
             <Route index element={<NotesList />} />
             <Route path=":id" element={<EditNotes />} />
-            <Route path="new" element={<NewNoteForm />} />
+            <Route path="new" element={<NewNote />} />
           </Route>
         </Route>
       </Route>
