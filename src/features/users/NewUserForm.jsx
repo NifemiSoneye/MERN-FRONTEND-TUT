@@ -6,7 +6,7 @@ import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { ROLES } from "../../config/roles";
 
 const USER_REGEX = /^[A-z]{3,20}$/;
-const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
+const PWD_REGEX = /^[A-Za-z0-9!@#$%]{4,12}$/;
 
 const NewUserForm = () => {
   const [addNewUser, { isLoading, isSuccess, isError, error }] =
@@ -15,16 +15,16 @@ const NewUserForm = () => {
   const navigate = useNavigate();
 
   const [username, setUserName] = useState("");
-  const [validUsername, setValidUserName] = useState("");
+  const [validUsername, setValidUserName] = useState(false);
   const [password, setPassword] = useState("");
-  const [validPassword, setValidPassword] = useState("");
+  const [validPassword, setValidPassword] = useState(false);
   const [roles, setRoles] = useState(["Employee"]);
 
   useEffect(() => {
     setValidUserName(USER_REGEX.test(username));
   }, [username]);
   useEffect(() => {
-    setValidPassword(USER_REGEX.test(password));
+    setValidPassword(PWD_REGEX.test(password));
   }, [password]);
 
   useEffect(() => {
@@ -122,7 +122,7 @@ const NewUserForm = () => {
           multiple={true}
           size="3"
           value={roles}
-          onChange={onRolesChanged}
+          onChange={onRolesChange}
         >
           {options}
         </select>
