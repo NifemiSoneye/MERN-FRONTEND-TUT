@@ -17,7 +17,8 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
-          await queryFulfilled;
+          const { data } = await queryFulfilled;
+          console.log(data);
           dispatch(logOut());
           setTimeout(() => {
             dispatch(apiSlice.util.resetApiState());
