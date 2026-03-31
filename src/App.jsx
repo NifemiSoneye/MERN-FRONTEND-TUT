@@ -32,11 +32,7 @@ function App() {
                 <Route index element={<Welcome />} />
                 <Route
                   element={
-                    <RequireAuth
-                      allowedRoles={[
-                        ...Object.values(ROLES.Manager, ROLES.Admin),
-                      ]}
-                    />
+                    <RequireAuth allowedRoles={[ROLES.Manager, ROLES.Admin]} />
                   }
                 >
                   <Route path="users">

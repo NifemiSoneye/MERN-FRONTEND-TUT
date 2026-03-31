@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useGetUsersQuery } from "./usersApiSlice";
 import { memo } from "react";
 
-import React from "react";
-
 const User = ({ userId }) => {
   const { user } = useGetUsersQuery("usersList", {
     selectFromResult: ({ data }) => ({
@@ -21,6 +19,7 @@ const User = ({ userId }) => {
     const userRolesString = user.roles.toString().replaceAll(",", ", ");
 
     const cellStatus = user.active ? "" : "table__cell--inactive";
+
     return (
       <tr className="table__row user">
         <td className={`table__cell ${cellStatus}`}>{user.username}</td>
@@ -34,5 +33,7 @@ const User = ({ userId }) => {
     );
   } else return null;
 };
-const memoizedUser = memo(user);
+
+const memoizedUser = memo(User);
+
 export default memoizedUser;

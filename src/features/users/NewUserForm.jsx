@@ -4,9 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { ROLES } from "../../config/roles";
-
 const USER_REGEX = /^[A-z]{3,20}$/;
-const PWD_REGEX = /^[A-Za-z0-9!@#$%]{4,12}$/;
+const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
 
 const NewUserForm = () => {
   const [addNewUser, { isLoading, isSuccess, isError, error }] =
@@ -14,37 +13,37 @@ const NewUserForm = () => {
 
   const navigate = useNavigate();
 
-  const [username, setUserName] = useState("");
-  const [validUsername, setValidUserName] = useState(false);
+  const [username, setUsername] = useState("");
+  const [validUsername, setValidUsername] = useState(false);
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
   const [roles, setRoles] = useState(["Employee"]);
 
   useEffect(() => {
-    setValidUserName(USER_REGEX.test(username));
+    setValidUsername(USER_REGEX.test(username));
   }, [username]);
+
   useEffect(() => {
     setValidPassword(PWD_REGEX.test(password));
   }, [password]);
 
   useEffect(() => {
     if (isSuccess) {
-      setUserName("");
-      setUserName("");
+      setUsername("");
       setPassword("");
       setRoles([]);
       navigate("/dash/users");
     }
   }, [isSuccess, navigate]);
 
-  const onUsernameChange = (e) => setUserName(e.target.value);
-  const onPasswordChange = (e) => setPassword(e.target.value);
+  const onUsernameChanged = (e) => setUsername(e.target.value);
+  const onPasswordChanged = (e) => setPassword(e.target.value);
 
-  const onRolesChange = (e) => {
+  const onRolesChanged = (e) => {
     const values = Array.from(
       e.target.selectedOptions, //HTMLCollection
       (option) => option.value,
-    ); //Allows more than one option to be selected
+    );
     setRoles(values);
   };
 
@@ -97,7 +96,7 @@ const NewUserForm = () => {
           type="text"
           autoComplete="off"
           value={username}
-          onChange={onUsernameChange}
+          onChange={onUsernameChanged}
         />
 
         <label className="form__label" htmlFor="password">
@@ -109,7 +108,7 @@ const NewUserForm = () => {
           name="password"
           type="password"
           value={password}
-          onChange={onPasswordChange}
+          onChange={onPasswordChanged}
         />
 
         <label className="form__label" htmlFor="roles">
@@ -122,7 +121,7 @@ const NewUserForm = () => {
           multiple={true}
           size="3"
           value={roles}
-          onChange={onRolesChange}
+          onChange={onRolesChanged}
         >
           {options}
         </select>
@@ -132,5 +131,4 @@ const NewUserForm = () => {
 
   return content;
 };
-
 export default NewUserForm;

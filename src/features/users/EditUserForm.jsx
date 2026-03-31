@@ -43,6 +43,7 @@ const EditUserForm = ({ user }) => {
       navigate("/dash/users");
     }
   }, [isSuccess, isDelSuccess, navigate]);
+
   const onUsernameChanged = (e) => setUsername(e.target.value);
   const onPasswordChanged = (e) => setPassword(e.target.value);
 
@@ -67,6 +68,7 @@ const EditUserForm = ({ user }) => {
   const onDeleteUserClicked = async () => {
     await deleteUser({ id: user.id });
   };
+
   const options = Object.values(ROLES).map((role) => {
     return (
       <option key={role} value={role}>
@@ -180,5 +182,4 @@ const EditUserForm = ({ user }) => {
 
   return content;
 };
-
 export default EditUserForm;

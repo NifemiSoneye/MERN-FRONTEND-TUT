@@ -1,9 +1,11 @@
-import React from "react";
 import { useGetNotesQuery } from "./notesApiSlice";
 import Note from "./Note";
 import useAuth from "../../hooks/useAuth";
+import PulseLoader from "react-spinners/PulseLoader";
+
 const NotesList = () => {
   const { username, isManager, isAdmin } = useAuth();
+
   const {
     data: notes,
     isLoading,
@@ -18,13 +20,15 @@ const NotesList = () => {
 
   let content;
 
-  if (isLoading) content = <p>Loading...</p>;
+  if (isLoading) content = <PulseLoader color={"#FFF"} />;
 
   if (isError) {
     content = <p className="errmsg">{error?.data?.message}</p>;
   }
+
   if (isSuccess) {
     const { ids, entities } = notes;
+
     let filteredIds;
     if (isManager || isAdmin) {
       filteredIds = [...ids];

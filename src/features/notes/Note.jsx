@@ -5,13 +5,13 @@ import { useGetNotesQuery } from "./notesApiSlice";
 import { memo } from "react";
 
 const Note = ({ noteId }) => {
-  const navigate = useNavigate();
-
   const { note } = useGetNotesQuery("notesList", {
     selectFromResult: ({ data }) => ({
       note: data?.entities[noteId],
     }),
   });
+
+  const navigate = useNavigate();
 
   if (note) {
     const created = new Date(note.createdAt).toLocaleString("en-US", {
@@ -51,4 +51,5 @@ const Note = ({ noteId }) => {
 };
 
 const memoizedNote = memo(Note);
+
 export default memoizedNote;
